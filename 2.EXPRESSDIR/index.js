@@ -32,7 +32,8 @@ app.get("/apple",(req,res)=>{
 app.get("/orange",(req,res)=>{
     res.send("you contacted orange path");
 });
-app.get("*",(req,res)=>{
+
+app.get(/^\/(.*)/,(req,res)=>{
     res.send("this path does not exist");
 });
 
