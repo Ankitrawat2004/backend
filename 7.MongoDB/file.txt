@@ -1,0 +1,64 @@
+//json => stores  text based data  and space inefficient
+//mongo store stat in BSON format
+
+MongoDB  stores data in form of document(BSON docs)
+MongoDB store documents in collections
+
+INSERT IN MongoDB
+show collections
+
+db.collection.insertOne()=> db.student.insertOne({name:"adam",marks:78})
+if a collection does not exist MongoDB CREATE THE collections when u first stored data fro that collection.
+
+//MongoDB automatically created insertedId which is primary key(unique and not null)
+
+db.collection.find()//returns everything
+db.student.find() => if we want to see the collection data
+
+insertMany(array of documents)
+db.student.insertMany([{name:"bob",marks:67},{name:"ankit",city:"delhi"}])
+
+FIND in MongoDB
+db.collection.find()
+for specific queries
+db.collection.find({key:value})            return a cursor{reference to original}
+db.collection.findOne({key:value})         return a actual document
+
+Query Operators
+$eq =equal
+$gt=greater than
+$gte = greater than equal
+
+db.student.find({marks:{$gt:75}})
+
+//find students who live in delhi or mumbai
+db.student.find({city:{$in:["delhi","mumbai"]}})
+
+$in => Operators CHECK THE MATCHING VALUE IN GIVEN LIST 
+
+//find student who scored >75 and lived ind delhi
+db.student.find({$or:[{marks:{$gt:75}},{city:"delhi"}]})
+
+//Update in db
+
+updateOne
+db.collection.updateOne({name:"ankit"},{$set:{marks:99}})
+
+db.collection.updateMany({city:"delhi"},{$set:{city:"new delhi"}})
+
+db.collection.replaceOne({name:"ankit"},{name:"shradha",marks:98,city:"haryana"})
+//replace whole document
+
+Nesting
+db.student.insertOne({name:"farah",performance:{marks:88 ,grade:"A"}})
+db.student.find({"performance.marks":88})
+
+DELETE IN db
+
+deleteOne
+db.collection.deleteOne({state:"haryana"})
+deleteMany
+db.stduent.deleteMany({}) // no condiotn apply delete everyone
+db.student.deleteMany({marks:{$lt:75}})
+
+db.dropDatabase() //delete Current Database
